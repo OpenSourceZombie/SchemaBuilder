@@ -7,18 +7,11 @@ class Blueprint
     protected $incrementFlag = false;
     protected $PrimaryKeyFlag = false;
     private $columns = array();
-    /*
-    public function integer($colname){
-        $this->columns[$colname] = new Column($colname);
-        return $this->columns[$colname];
-    }
-    */
-/*    public function increments($colname)
-    {
-        $this->columns[$colname] = new Column($colname, "integer");
-        return $this->columns[$colname];
-    }
-*/
+ 
+    /**
+     * @parm string $columnType
+     * @parm array $args extra parameters for the column
+     */
     public function __call($columnType, $args)
     {
     
@@ -27,9 +20,13 @@ class Blueprint
         $this->columns[$columnName] = new Column($columnName, $columnType, $columnMax);
         return $this->columns[$columnName];
     }
+
+    /**
+     *@parm $name string table name
+     *@return stirng SQL generated string for this table
+     */
     public function generate($name)
     {
-        //$SQL = sprintf("CRAETE %s %s ");
         $format = "CREATE TABLE( %s ) %s";
             
         $cols = "";
@@ -45,6 +42,5 @@ class Blueprint
         }
 
         echo  preg_replace('/\s+/', ' ', sprintf($format, $cols,'')), PHP_EOL ;
- //       var_dump($this->columns);       
     }
 }

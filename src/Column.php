@@ -8,6 +8,11 @@ Class Column
     protected $max;
     protected $increments;
 
+    /**
+     * @param $name string Column name
+     * @param $type string Column type
+     * @param $max int Max value for this column
+     */
     function __construct($name, $type = '', $max = '') {
         $this->name = $name;
         $this->type = $type;
