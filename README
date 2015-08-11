@@ -1,1 +1,14 @@
 Generate SQL statments using PHP
+Inspired by Laravel SchemaBuilder
+
+##How to use it ##
+```
+require 'Schema.php';
+
+$userSchema = new Schema();
+$SerSchema->create("users", function($table){
+    $table->INT("id")->autoinc()->default_value(0);
+    $table->VARCHAR("username" ,250);
+    $table->TEXT("bio")->nullable()->max(200);
+})->generate();
+```
